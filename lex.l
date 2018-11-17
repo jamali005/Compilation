@@ -2,17 +2,17 @@
 #include<stdio.h>
 %}
 %%
-[ \t\n]+ printf("sep(%s)\n",yytext);
+[ \t\n]+ printf("sep(%s) ",yytext);
 "--"[^\n]*  
-procedure printf("proc(%s)\n",yytext);
-is printf("is(%s)\n",yytext);
-begin printf(" BEG_IN(%s)\n",yytext);
-end printf(" END(%s)\n",yytext);
-Put_Line printf(" putline(%s)\n",yytext);
-New_Line printf("New_Line'%s)\n",yytext);
-Put printf("put\n");
-package printf("package\n");
-record printf("record\n");
+procedure printf("proc(%s) ",yytext);
+is printf("is(%s) ",yytext);
+begin printf(" BEG_IN(%s) ",yytext);
+end printf(" END(%s) ",yytext);
+Put_Line printf(" putline(%s) ",yytext);
+New_Line printf("New_Line'%s) ",yytext);
+Put printf("put ");
+package printf("package ");
+record printf("record ");
 out printf("out");
 in printf("in");
 with printf("with(%s) ",yytext);
@@ -68,7 +68,7 @@ while printf(" while ");
 for printf( " for ");
 ";" printf(" PVIRG ");
 "(" printf(" POPEN ");
-")\n" printf(" PCLOSE ");
+")" printf(" PCLOSE ");
 [_a-zA-Z][_a-zA-Z0-9]*  printf(" IDF(%s) ",yytext);
 .	printf("ERR_LEX( %s )\n", yytext);
 %%
