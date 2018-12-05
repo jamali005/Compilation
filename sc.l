@@ -30,9 +30,10 @@ INST	 [;]
 "positive"		{return POSITIVE;}
 "true"			{return TRUE;}
 "false"			{return FALSE;}
-":"			{return GTYPE;}
 ":="			{return AFFECTATION;}
-
+":"			{return GTYPE;}
+"("			{return POPEN;}
+")"			{return PCLOSE;}
 [-+]?[0-9]*+\.[0-9]*	{return DNUMBER;}
 
 [-+]?[0-9]+		{return INUMBER;}

@@ -1,0 +1,5 @@
+#!/bin/bash
+flex -i sc.l
+gcc -c lex.yy.c
+gcc -c analys.c
+gcc -o zzc lex.yy.o analys.o -lfl

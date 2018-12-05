@@ -52,7 +52,7 @@ int main(int argc , char** argv ){
 
 
 
-
+//TYPE = INTEGER|STRING|FLOAT|CHAR|BOOL|NATURAL|POSITIVE|IDF
 
 boolean _type(){
 	
@@ -98,7 +98,7 @@ boolean _type(){
 	
 }
 
-
+//CONST = DNUMBER|INUMBER|TRUE|FALSE 
 
 boolean _const(){
 	
@@ -131,9 +131,23 @@ boolean _const(){
 	return result;
 	
 }
-
-
-
+//CONSTAUX = CONST|ARRAY
+boolean _constaux(){
+	
+	boolean result;
+	if(_const()){
+		result=true;
+	}
+	else if(_array()){
+		result=true;
+	}
+	else{
+		result=false;
+	}
+	return result;
+}
+//DECL_AUX = := CONSTAUX | INST
+//CONSTAUX = CONST|ARRAY
 boolean _decl_aux(){
 	boolean result;
 	
@@ -141,7 +155,7 @@ boolean _decl_aux(){
 		printf(" affectation(:=) detected \n");
 		token = _lire_token();
 		
-		if (_const()==true){
+		if (_constaux()==true){
 			printf(" const detected\n");
 			result = true;
 			token = _lire_token();
@@ -168,7 +182,7 @@ boolean _decl_aux(){
 
 
 
-
+//DECL = IDF : TYPE DECL_AUX|
 
 boolean _decl(){
 	
@@ -200,7 +214,7 @@ boolean _decl(){
 	
 }
 
-
+// LISTE_DECL = DECL LISTE_DECL_AUX 
 
 boolean _liste_decl(){
 	boolean result;
@@ -222,7 +236,7 @@ boolean _liste_decl(){
 }
 
 
-
+//LISTE_DECL_AUX = LISTE_DECL | EPS
 boolean _liste_decl_aux(){
 	boolean result;
 	
@@ -260,6 +274,46 @@ boolean _prog(){
 	}
 	
 	return result;
+}
+
+
+
+
+//ARRAY_LIST: (LISTNUM)
+//LISTNUM : NUM ListNUM_aux
+//List_num_aux : virg num|eps
+
+
+boolean _array(){
+	boolean result;
+	
+	if(token == POPEN){
+		token=_lire_token();
+		if(_listenum()){
+			if(token == PCLOSE){
+				result = true ;
+			}
+			else{
+				printf("error pclose\n");
+				result = false;
+			}
+		}
+		else{
+			printf("error _listenum\n");
+			result = true;
+		}
+	}
+	else{
+		printf("error popen\n");
+		result = false;
+	}
+	return result;
+}
+
+boolean _listenum(){
+	boolean result=true;
+	
+return result;
 }
 
 
