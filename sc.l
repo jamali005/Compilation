@@ -30,8 +30,15 @@ INST	 [;]
 "positive"		{return POSITIVE;}
 "true"			{return TRUE;}
 "false"			{return FALSE;}
+"for"			{return LOOPFOR;}
+"in"			{return IN;}
+".."			{return BETWEEN;}
+"loop"			{return LOOP;}
+"Put_Line"		{return PUTLINE;}
 ":"			{return GTYPE;}
 ":="			{return AFFECTATION;}
+"("			{return POPEN;}
+")"			{return PCLOSED;}
 
 [-+]?[0-9]*+\.[0-9]*	{return DNUMBER;}
 

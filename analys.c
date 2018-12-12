@@ -133,7 +133,7 @@ boolean _const(){
 }
 
 
-
+//DECL_AUX : ':=' CONST ';' | ';'
 boolean _decl_aux(){
 	boolean result;
 	
@@ -143,9 +143,15 @@ boolean _decl_aux(){
 		
 		if (_const()==true){
 			printf(" const detected\n");
-			result = true;
 			token = _lire_token();
-			_decl_aux();
+			if (token == INST){
+				printf(" fin_inst detected\n");
+				result = true;
+			}
+			else {
+				printf(" fin_inst not detected\n");
+				result = false;
+			}
 		
 		}
 		else {
@@ -169,10 +175,10 @@ boolean _decl_aux(){
 
 
 
-
+//DECL : idf GTYPE TYPE DECL_AUX
 boolean _decl(){
 	
-	boolean result = false ;
+	boolean result;
 	
 	if (token == IDF){
 		printf(" IDF detected \n");
@@ -189,12 +195,24 @@ boolean _decl(){
 				if (_decl_aux() == true){
 					result = true;
 				}
+				else {
+					result = false;
+				}
 				
-			}else {printf(" type NOT detected \n");}
+			}else {
+				printf(" type NOT detected \n");
+				result = false;
+				}
 				
-		}else {printf(" GTYPE(:) NOT detected \n");}
+		}else {
+			printf(" GTYPE(:) NOT detected \n");
+			result = false;
+		}
 		
-	}else {printf(" IDF NOT detected \n");}
+	}else {
+		printf(" IDF NOT detected \n");
+		result = false;
+		}
 		
 	return result;	
 	
@@ -242,14 +260,29 @@ boolean _liste_decl_aux(){
 }
 
 
-
+//PROG : LISTE_DECL begin LISTE_INST end
 boolean _prog(){
 	boolean result;
 	
 	if (_liste_decl()){
 		token = _lire_token();
 		if (token == BEG_IN){
-			result = true;
+			printf(" BEGIN detected \n");
+			token = _lire_token();
+			if (_liste_inst()){
+				token = _lire_token();
+				if (token == END){
+					printf(" END detected \n");
+					token = _lire_token();
+					if (token == INST){
+						printf(" fin_inst detected \n");
+						result = true;
+					}
+					else {result = false;}
+				}
+				else {result = false;}
+			}
+			else {result = false;}
 		}
 		else {
 			result = false;
@@ -263,3 +296,178 @@ boolean _prog(){
 }
 
 
+//LISTE_INST : INSTR LISTE_INSTAUX
+boolean _liste_inst(){
+	
+	boolean result;
+	
+	if (_instr()){
+		token = _lire_token();
+		printf("- - - - - - - - - - - - - - - - - - - - - - - - \n");
+		if (_liste_inst_aux()){
+			result = true;
+		}
+		else {
+			result = false;
+		}
+	}
+	
+	else {
+		result = false;
+	}
+	
+	return result;
+}
+
+
+//LISTE_INSTAUX : LISTE_INST | epsilon
+boolean _liste_inst_aux(){
+	
+	boolean result;
+	
+	if (token == END){
+		
+		follow_token = true;
+		result = true;
+	}
+	
+	else if (_liste_inst()){
+		result = true;
+	}
+	
+	else {
+		result = false;
+	}
+	
+	return result;
+	
+}
+
+
+//  INSTR : for IDF inumber .. inumber loop LISTE_INST endLoop
+boolean _instr(){
+	
+	boolean result;
+	
+	if (token == LOOPFOR){
+		printf(" FOR detected \n");
+		token = _lire_token();
+		
+		if (token == IDF){
+			printf(" IDF detected \n");
+			token = _lire_token();
+			
+			if (token == IN){
+				printf(" in detected \n");
+				token = _lire_token();
+				
+				if (token == INUMBER){
+					printf(" INUMBER detected \n");
+					token = _lire_token();
+					
+					if (token == BETWEEN){
+						printf(" .. detected \n");
+						token = _lire_token();
+						
+						if (token == INUMBER){
+							printf(" INUMBER detected \n");
+							token = _lire_token();
+							
+							if (token == LOOP){
+								printf(" loop detected \n");
+								token = _lire_token();
+								
+								if (_liste_inst()){
+									token = _lire_token();
+									
+									if (token == END){
+										printf(" END detected \n");
+										token = _lire_token();
+										
+										if (token == LOOP){
+											printf(" Loop detected \n");
+											token = _lire_token();
+											
+											if (token == INST){
+												printf(" fin_inst detected \n");
+												result = true;
+											}
+											else {
+												result = false;
+											}
+										}
+										else {
+											result = false;
+										}
+									}
+									else {
+										result = false;
+									}
+								}
+								else {
+									result = false;
+								}
+							}
+							else {
+								result = false;
+							}
+						}
+						else {
+							result = false;
+						}
+					}
+					else {
+						result = false;
+					}
+				}
+				else {
+					result = false;
+				}
+			}
+			else {
+				result = false;
+			}
+		}
+		else {
+			result = false;
+		}
+	}
+	
+	else if (token == PUTLINE){
+		printf(" Put_Line detected \n");
+		token = _lire_token();
+		if (token == POPEN){
+			printf(" ( detected \n");
+			token = _lire_token();
+			if (token == PCLOSED){
+				printf(" ) detected \n");
+				token = _lire_token();
+				if (token == INST){
+					printf(" fin_inst detected \n");
+					result = true;
+				}
+				else {
+					result = false;
+				}
+			}
+			else {
+				result = false;
+			}
+		}
+		else {
+			result = false;
+		}
+	}
+	
+	else {
+		result = false;
+	}
+	
+	return result;
+	
+}
+
+
+
+//for I in 1 .. 5 loop
+//end loop;

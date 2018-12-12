@@ -1,0 +1,11 @@
+x : integer ;
+d : integer := 5;
+f : integer;
+begin
+for s in 1 .. 4 loop
+Put_Line();
+end loop;
+for s in 1 .. 4 loop
+Put_Line();
+end loop;
+end;

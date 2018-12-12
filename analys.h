@@ -27,7 +27,14 @@ typedef enum{
 	AFFECTATION,
 	GTYPE,
 	DNUMBER,
-	INUMBER
+	INUMBER,
+	LOOPFOR,
+	IN,
+	BETWEEN,
+	LOOP,
+	PUTLINE,
+	POPEN,
+	PCLOSED
 
 }typetoken;
 
@@ -48,6 +55,8 @@ boolean _decl();
 boolean _liste_decl();
 boolean _liste_decl_aux();
 boolean _prog();
-
+boolean _liste_inst();
+boolean _liste_inst_aux();
+boolean _instr();
 
 #endif
