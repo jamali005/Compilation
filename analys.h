@@ -5,7 +5,7 @@
 
 
 typedef enum{
-	INST,
+	
 	COMMENTARY,
 	PACKAGE,
 	WITH,
@@ -27,7 +27,18 @@ typedef enum{
 	AFFECTATION,
 	GTYPE,
 	DNUMBER,
-	INUMBER
+	INUMBER,
+	POPEN,
+	PCLOSE,
+	VIRG,
+	CONSTANT,
+	PVIRG,
+	IF,
+	ELSE,
+	THEN,
+	//ELSEIF
+	EGAL,
+	ERRL
 
 }typetoken;
 
@@ -48,6 +59,17 @@ boolean _decl();
 boolean _liste_decl();
 boolean _liste_decl_aux();
 boolean _prog();
-
-
+boolean _constaux();
+boolean _array();
+boolean _listenum();
+boolean _listnum_aux();
+boolean _condition();
+boolean _oper();
+boolean _if_stat();
+boolean _if_insteaux();
+boolean _inst();
+boolean _liste_inst();
+boolean _liste_inst_aux();
+boolean _print();
+boolean _affectation();
 #endif

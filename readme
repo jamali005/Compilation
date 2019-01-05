@@ -1,0 +1,4 @@
+this folder containes the ADA's if statement with its gramma devloped in the analyde_if.c file.
+Also the based on example is in the file test.
+the zone of condition and instructions will be replaced with an idf till we devlope the two functions
+_condition() and _affectation() and also _print().
