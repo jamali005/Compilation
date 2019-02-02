@@ -1,0 +1,23 @@
+
+
+Res : INTEGER;Res : INTEGER;
+B : Float := 5.2;
+A : String ;
+C :Float :=2.3;
+S : Natural :=2;
+A : character ;
+A : INTEGER;
+A : character;
+BEGIN
+if a = 3 
+	a := 1;
+else
+	a := 8;
+end if;
+for s in 1 .. 4 loop
+Put_Line ("OK: Found existing value at first index");
+end loop;
+for s in 1 .. 4 loop
+Put_Line ("OK: Found existing value at first index");
+end loop;
+end;

@@ -1,0 +1,15 @@
+Res : INTEGER;
+test : INTEGER
+BEGIN 
+if a then
+	a
+else
+	a
+end if;
+for s in 1 .. 4 loop
+Put_Line ("OK: Found existing value at first index");
+end loop;
+for s in 1 .. 4 loop
+Put_Line ("OK: Found existing value at first index");
+end loop;
+end;

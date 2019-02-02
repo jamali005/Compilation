@@ -1,0 +1,8 @@
+#!/bin/bash
+flex -i sc.l
+gcc -c lex.yy.c
+gcc -c analys.c
+gcc -c cfg.c
+gcc -c error.c
+gcc -c tablesymb.c
+gcc -o zzc lex.yy.o analys.o cfg.o error.o tablesymb.o -lfl
